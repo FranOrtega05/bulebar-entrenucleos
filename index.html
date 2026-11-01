@@ -1,0 +1,670 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Bulebar Entrenúcleos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Outfit:wght@400;500;600&display=swap">
+<style>
+/* Concepto: sala oscura de cobre y oro. Titular serif con fotos incrustadas a la altura del texto, hero asimétrico sin solapes, bento de fotos y carta en carrusel. */
+:root{
+  --bg:#14100d;--bg2:#1a1410;--surface:#221a15;--ink:#f3ebdf;--dim:#c0b3a5;--mute:#9b8e81;
+  --gold:#c9a661;--gold2:#dcc088;--on-gold:#1a140e;--line:rgba(243,235,223,.13);--ok:#6fcf97;--bad:#e58a7b;
+  --display:'Fraunces',Georgia,'Times New Roman',serif;--body:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.23,1,.32,1);--ease-io:cubic-bezier(.77,0,.175,1);--ease-drawer:cubic-bezier(.32,.72,0,1);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:128px}
+body{margin:0;background:var(--bg);color:var(--dim);font:400 1.0625rem/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+.wrap{width:min(100%,1280px);margin-inline:auto;padding-inline:clamp(1rem,4vw,3rem)}
+section{padding-block:clamp(4rem,9vw,8rem)}
+.eyebrow{display:inline-flex;align-items:center;gap:.8rem;font:500 .78rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--gold)}
+h1,h2,h3{font-family:var(--display);font-weight:500;color:var(--ink);margin:0;text-wrap:balance;letter-spacing:-.02em;font-optical-sizing:auto}
+h2{font-size:clamp(2.1rem,4.2vw,3.4rem);line-height:1.08}
+.lede{max-width:56ch;margin:0}
+.lede+.lede{margin-top:1rem}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.65rem;min-height:48px;padding:.85rem 1.6rem;border-radius:999px;font:500 .95rem/1 var(--body);letter-spacing:.01em;border:1px solid var(--line);color:var(--ink);transition:transform 160ms var(--ease),background-color 200ms var(--ease),border-color 200ms var(--ease),color 200ms var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn.pri{background:var(--gold);border-color:var(--gold);color:var(--on-gold);font-weight:600}
+.btn svg{width:18px;height:18px;flex:none}
+@media (hover:hover) and (pointer:fine){
+  .btn.pri:hover{background:var(--gold2);border-color:var(--gold2);transform:translateY(-1px)}
+  .btn:not(.pri):hover{border-color:var(--gold);color:var(--gold2);transform:translateY(-1px)}
+}
+.lk{position:relative;display:inline-flex;align-items:center;gap:.5rem;color:var(--gold2);font-weight:500;padding-block:.35rem;min-height:44px}
+.lk::after{content:"";position:absolute;left:0;right:0;bottom:.1rem;height:1px;background:currentColor;transform:scaleX(.32);transform-origin:left;transition:transform 300ms var(--ease)}
+.lk svg{width:16px;height:16px;transition:transform 200ms var(--ease)}
+@media (hover:hover) and (pointer:fine){.lk:hover::after{transform:scaleX(1)}.lk:hover svg{transform:translateX(3px)}}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(20,16,13,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;min-height:72px}
+.brand{display:flex;align-items:center;gap:.8rem;font:500 1.15rem/1 var(--display);color:var(--ink);letter-spacing:-.01em}
+.brand img{width:42px;height:42px;border-radius:50%}
+.nav-in{min-height:64px}
+.nav .pill{display:none;padding:.5rem .9rem;border-radius:999px;border:1px solid var(--line);font-size:.88rem}
+.secbar{display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;padding-block:.15rem .65rem}
+.secbar::-webkit-scrollbar{display:none}
+.secbar a{flex:none;min-height:40px;display:inline-flex;align-items:center;padding:.4rem 1rem;border-radius:999px;font-size:.92rem;font-weight:500;color:var(--dim);border:1px solid transparent;transition:color 200ms var(--ease),background-color 200ms var(--ease),border-color 200ms var(--ease),transform 160ms var(--ease)}
+.secbar a:active{transform:scale(.96)}
+.secbar a[aria-current="true"]{color:var(--on-gold);background:var(--gold);font-weight:600}
+@media (hover:hover) and (pointer:fine){.secbar a:not([aria-current="true"]):hover{color:var(--ink);border-color:var(--line)}}
+.nav .btn{min-height:44px;padding:.65rem 1.25rem;font-size:.88rem}
+@media (min-width:700px){.nav .pill{display:inline-flex;margin-left:auto}.nav-in{justify-content:flex-start}.heromob{display:none!important}}
+@media (min-width:900px){.secbar{justify-content:center}}
+.nav{background:linear-gradient(to bottom,rgba(14,10,8,.9),rgba(14,10,8,.45) 70%,rgba(14,10,8,0));transition:background-color 200ms var(--ease),border-color 200ms var(--ease)}
+.nav.scrolled{background:rgba(20,16,13,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:var(--line)}
+
+/* hero */
+.hero{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-height:min(100dvh,940px);padding-top:150px;padding-bottom:clamp(2rem,4vw,3.5rem)}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.hero h1{font-size:clamp(3.4rem,9vw,8.2rem);line-height:.94;margin-block:1.2rem 1.4rem;letter-spacing:-.035em}
+.hero h1 em{font-style:italic;color:var(--gold2);font-weight:400}
+.chip{display:inline-block;width:1.7em;height:.78em;border-radius:999px;background-size:cover;background-position:center;vertical-align:-.04em;margin-inline:.08em;border:1px solid var(--line)}
+.hero .lede{font-size:1.12rem;color:var(--dim)}
+.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:1.4rem 2rem;margin-top:2.2rem}
+.status{display:inline-flex;align-items:center;gap:.7rem;font-size:.95rem;color:var(--ink);font-weight:500}
+.dot{position:relative;width:10px;height:10px;border-radius:50%;background:var(--mute);flex:none}
+.open .dot{background:var(--ok)}
+.open .dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--ok);animation:ping 2.4s var(--ease) infinite}
+.closed .dot{background:var(--bad)}
+@keyframes ping{0%{transform:scale(1);opacity:.55}80%,100%{transform:scale(2.8);opacity:0}}
+.vis{display:grid;grid-template-columns:1fr .62fr;gap:clamp(.8rem,1.6vw,1.4rem);align-items:start}
+.vis figure{margin:0}
+.ph{overflow:hidden;border-radius:24px;border:1px solid var(--line);background:var(--surface)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform 900ms var(--ease)}
+.arch{border-radius:999px 999px 24px 24px;aspect-ratio:4/5.3}
+.vis .col{display:grid;gap:clamp(.8rem,1.6vw,1.4rem);margin-top:clamp(2rem,5vw,4.5rem)}
+.vis .sq{aspect-ratio:1/1.12}
+@media (hover:hover) and (pointer:fine){.ph:hover img{transform:scale(1.04)}}
+
+/* franja de datos */
+.strip{border-block:1px solid var(--line);background:var(--bg2);padding-block:0}
+.strip-grid{display:grid;grid-template-columns:1.1fr 1.1fr .8fr}
+.cell{display:grid;gap:.35rem;align-content:start;padding:clamp(1.4rem,2.6vw,2.2rem) clamp(1rem,2vw,2rem)}
+.cell+.cell{border-left:1px solid var(--line)}
+.cell:first-child{padding-left:0}
+.cell small{font:500 .74rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.cell b{font:500 1.3rem/1.25 var(--display);color:var(--ink);letter-spacing:-.01em}
+.cell span{font-size:.95rem}
+
+/* la casa */
+.story{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,6vw,6rem);align-items:center}
+.story .ph{aspect-ratio:4/4.8}
+.story h2{margin-block:1.2rem 1.5rem}
+.facts{margin:2.2rem 0 0;display:grid;border-top:1px solid var(--line)}
+.facts div{display:grid;grid-template-columns:minmax(8rem,.5fr) 1fr;gap:1rem;padding-block:1.05rem;border-bottom:1px solid var(--line)}
+.facts dt{font:500 1.15rem/1.3 var(--display);color:var(--gold2);letter-spacing:-.01em}
+.facts dd{margin:0;font-size:.98rem}
+
+/* ambiente */
+.bg2{background:var(--bg2);border-block:1px solid var(--line)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:2rem;flex-wrap:wrap;margin-bottom:clamp(2rem,4vw,3.5rem)}
+.head h2{margin-top:1.2rem;max-width:18ch}
+.bento{display:grid;grid-template-columns:1.25fr 1fr 1fr;grid-template-rows:repeat(2,clamp(220px,25vw,340px));gap:clamp(.7rem,1.4vw,1.2rem)}
+.bento button{display:block;position:relative;padding:0;cursor:zoom-in}
+.bento .a{grid-row:1/3}
+.bento .b{grid-column:2/4}
+.bento .ph{height:100%}
+.zoom-ic{position:absolute;right:14px;bottom:14px;width:40px;height:40px;border-radius:50%;background:rgba(20,16,13,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;border:1px solid var(--line);opacity:0;transform:scale(.9);transition:opacity 200ms var(--ease),transform 200ms var(--ease)}
+.zoom-ic svg{width:18px;height:18px;color:var(--ink)}
+@media (hover:hover) and (pointer:fine){.bento button:hover .zoom-ic{opacity:1;transform:scale(1)}}
+@media (hover:none){.zoom-ic{opacity:1;transform:none}}
+
+/* marquesina de platos */
+.marq{display:grid;gap:clamp(.6rem,1.2vw,1rem);padding-block:clamp(1rem,2vw,1.6rem);overflow:hidden;background:var(--bg)}
+.mrow{overflow:hidden}
+.mtrack{display:flex;gap:clamp(.6rem,1.2vw,1rem);width:max-content;animation:mq 60s linear infinite}
+.mrow.rev .mtrack{animation-direction:reverse;animation-duration:75s}
+.mi{flex:none;width:clamp(150px,17vw,250px);aspect-ratio:4/3;border-radius:18px;overflow:hidden;border:1px solid var(--line)}
+.mi img{width:100%;height:100%;object-fit:cover}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (hover:hover) and (pointer:fine){.marq:hover .mtrack{animation-play-state:paused}}
+
+/* sello giratorio */
+.seal{position:relative;aspect-ratio:1;display:grid;place-items:center}
+.seal svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 24s linear infinite}
+.seal text{fill:var(--gold2);font:500 13.5px var(--body);letter-spacing:.12em}
+.seal img{width:50%;height:auto;border-radius:50%}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* carta (papel) */
+.paper{--ink:#1c1611;--dim:#4a4036;background:#f6efdf;color:var(--dim)}
+.paper h2,.paper h3{color:var(--ink)}
+.paper .eyebrow{color:#745613}.paper .eyebrow::before{background:#745613}
+.btn.dk{background:#1c1611;border-color:#1c1611;color:#f6efdf;font-weight:600}
+.btn.dko{background:transparent;border-color:#1c1611;color:#1c1611;font-weight:600}
+.btn.big{min-height:60px;padding:1rem 2rem;font-size:1.05rem}
+@media (hover:hover) and (pointer:fine){.btn.dk:hover{background:#0f0b08;border-color:#0f0b08;color:#f6efdf;transform:translateY(-1px)}.btn.dko:hover{background:#1c1611;color:#f6efdf;transform:translateY(-1px)}}
+.tabs{display:flex;gap:.6rem;overflow-x:auto;scrollbar-width:none;padding-bottom:.4rem;margin-bottom:clamp(1.6rem,3vw,2.6rem)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;min-height:48px;padding:.6rem 1.35rem;border-radius:999px;border:1.5px solid #1c1611;font:500 .98rem/1 var(--body);color:#1c1611;transition:transform 160ms var(--ease),background-color 200ms var(--ease),color 200ms}
+.tab:active{transform:scale(.96)}
+.tab[aria-selected="true"]{background:#e9b92f;border-color:#e9b92f;color:#1c1611;font-weight:600}
+@media (hover:hover) and (pointer:fine){.tab[aria-selected="false"]:hover{background:#1c1611;color:#f6efdf}}
+.panel{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(1.6rem,4vw,4rem);align-items:start}
+.panel.enter{animation:pin 320ms var(--ease) both}
+@keyframes pin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.plist h3{font-size:clamp(1.5rem,2.6vw,2.1rem);margin-bottom:1.2rem}
+.plist ul{list-style:none;margin:0;padding:0;border-top:1.5px solid #1c1611}
+.plist li{display:flex;align-items:baseline;gap:.8rem;padding:.95rem 0;border-bottom:1px solid rgba(28,22,17,.16)}
+.panel.enter li{animation:pin 380ms var(--ease) both;animation-delay:calc(var(--i)*35ms)}
+.plist .n{flex:0 1 auto;font-weight:500;color:#1c1611;font-size:1.04rem;line-height:1.35;max-width:36ch}
+.plist .l{flex:1 1 1rem;min-width:.8rem;border-bottom:1.5px dotted rgba(28,22,17,.4);transform:translateY(-.25em)}
+.plist .p{flex:none;font:600 1.2rem/1 var(--display);color:#1c1611;font-variant-numeric:tabular-nums;white-space:nowrap}
+.post{margin:0;font:400 italic clamp(1.4rem,2.4vw,1.9rem)/1.3 var(--display);color:#1c1611;max-width:28ch}
+.post.small{font:500 1rem/1.4 var(--body);font-style:normal;margin-top:1.4rem;color:#4a4036}
+.pph{display:block;width:100%;cursor:zoom-in;position:sticky;top:96px}
+.pph .ph{display:block;aspect-ratio:3/4;border-color:rgba(28,22,17,.15);background:#e8dfc9}
+.legend{margin:1.8rem 0 0;font-size:.92rem;color:#5b4f43}
+
+/* reservar (bloque dorado) */
+.gold{--ink:#1c1611;--dim:#2e251c;background:#d8b36a;color:#2e251c;padding-block:clamp(4rem,8vw,7rem)}
+.gold h2{color:#1c1611;font-size:clamp(3rem,8.2vw,7rem);line-height:.98;margin-block:1.2rem 1.4rem}
+.gold .eyebrow{color:#1c1611}.gold .eyebrow::before{background:#1c1611}
+.gold .lede{color:#2e251c;font-size:1.15rem}
+.book{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(2rem,6vw,6rem);align-items:end}
+.bk-act{display:grid;gap:1rem;justify-items:stretch}
+.bk-act .status{color:#1c1611;justify-content:center;margin-top:.4rem}
+.gold .open .dot{background:#0f6b3a}.gold .open .dot::after{background:#0f6b3a}.gold .closed .dot{background:#8c2a1a}
+
+/* opiniones */
+.rev{display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(2rem,6vw,6rem);align-items:center}
+.score{font:500 clamp(4.5rem,10vw,8rem)/.9 var(--display);color:var(--gold2);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.stars{position:relative;display:inline-block;font-size:1.4rem;letter-spacing:.18em;color:var(--line);margin-top:.9rem;line-height:1}
+.stars i{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:var(--gold);font-style:normal;width:84%}
+.rev p.cnt{margin:.7rem 0 0;font-size:.95rem}
+blockquote{margin:0;font:italic 400 clamp(1.6rem,3.2vw,2.5rem)/1.28 var(--display);color:var(--ink);letter-spacing:-.015em;text-wrap:balance}
+.rev .acts{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+
+/* visita */
+.visit{display:grid;grid-template-columns:1.3fr .9fr 1fr;gap:clamp(2rem,4vw,4rem)}
+.visit h3{font-size:1.5rem;margin-bottom:1.1rem;color:var(--gold2)}
+.visit address{font-style:normal;margin-bottom:1rem}
+.hours{width:100%;border-collapse:collapse;font-size:.98rem}
+.hours th{text-align:left;font-weight:400;color:var(--dim)}
+.hours td{text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
+.hours th,.hours td{padding:.7rem 0;border-bottom:1px solid var(--line)}
+.hours tr.today th,.hours tr.today td{color:var(--ink);font-weight:500}
+.tg{display:inline-block;margin-left:.6rem;padding:.2rem .55rem;border-radius:999px;background:var(--gold);color:var(--on-gold);font:600 .68rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;vertical-align:middle}
+.tel{font:500 1.9rem/1.1 var(--display);color:var(--ink);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.stack{display:grid;gap:.4rem;justify-items:start}
+.copyok{min-height:1.3em;font-size:.85rem;color:var(--ok);margin:.2rem 0 0}
+footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);font-size:.9rem;color:var(--mute)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:1rem 2rem;flex-wrap:wrap}
+.foot nav{display:flex;gap:1.4rem;flex-wrap:wrap}
+.foot a{display:inline-flex;align-items:center;min-height:44px;transition:color 200ms}
+@media (hover:hover) and (pointer:fine){.foot a:hover{color:var(--ink)}}
+.fbrand{display:flex;align-items:center;gap:.7rem;color:var(--dim)}
+.fbrand img{width:30px;height:30px;border-radius:50%}
+
+/* barra móvil */
+.dock{position:fixed;inset:auto 0 0 0;z-index:40;display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:.5rem;padding:.6rem clamp(.7rem,3vw,1rem) calc(.6rem + env(safe-area-inset-bottom,0px));background:rgba(20,16,13,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+.dock .btn{min-height:48px;padding:.6rem .5rem;font-size:.9rem;gap:.45rem}
+@media (min-width:900px){.dock{display:none}}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;display:grid;grid-template-rows:1fr auto;place-items:center;padding:clamp(1rem,3vw,2rem);background:rgba(14,10,8,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);opacity:0;pointer-events:none;transition:opacity 220ms var(--ease)}
+.lb.open{opacity:1;pointer-events:auto}
+.lb figure{margin:0;min-height:0;display:grid;gap:.9rem;justify-items:center;transform:scale(.96);transition:transform 260ms var(--ease)}
+.lb.open figure{transform:none}
+.lb img{max-width:min(92vw,1100px);max-height:78dvh;width:auto;height:auto;object-fit:contain;border-radius:14px}
+.lb figcaption{color:var(--ink);font:500 1.15rem/1.3 var(--display);text-align:center}
+.lb .x,.lb .pv,.lb .nx{position:absolute;width:48px;height:48px;border-radius:50%;background:rgba(243,235,223,.1);border:1px solid var(--line);display:grid;place-items:center;color:var(--ink);transition:transform 160ms var(--ease),background-color 200ms}
+.lb .x{top:max(1rem,env(safe-area-inset-top,0px));right:1rem}
+.lb .pv{left:1rem;top:50%;margin-top:-24px}.lb .nx{right:1rem;top:50%;margin-top:-24px}
+.lb svg{width:20px;height:20px}
+.lb button:active{transform:scale(.94)}
+.lb .pv:active,.lb .nx:active{transform:scale(.94)}
+.lb nav{display:none}
+
+/* aparición */
+.js .rv{opacity:.35;transform:translateY(22px);transition:opacity 520ms var(--ease),transform 520ms var(--ease);transition-delay:calc(var(--i,0)*55ms)}
+.js .rv.in{opacity:1;transform:none}
+.hero .rv{animation:rise 900ms var(--ease) both;animation-delay:calc(var(--i,0)*90ms)}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.js .hero .rv{opacity:1;transform:none;transition:none}
+@media (prefers-reduced-motion:reduce){
+  .hero-bg img{animation:none}
+  .mtrack,.seal svg{animation:none}
+  .mrow{overflow-x:auto}
+  html{scroll-behavior:auto}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .hero .rv{animation:none}
+  .open .dot::after{animation:none}
+  *{transition-duration:.01ms!important}
+}
+
+/* responsive */
+@media (max-width:1000px){
+  .hero-grid,.story,.book,.rev,.visit,.panel{grid-template-columns:1fr}
+  .pph{position:static;max-width:420px}
+  .hero .vis{max-width:560px}
+  .story .ph{aspect-ratio:4/3.6}
+  .strip-grid{grid-template-columns:1fr}
+  .cell+.cell{border-left:0;border-top:1px solid var(--line)}
+  .cell,.cell:first-child{padding-inline:0}
+  .bento{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,clamp(160px,34vw,260px))}
+  .bento .a{grid-row:1/3;grid-column:1}
+  .bento .b{grid-column:2;grid-row:1}
+  .bento .c{grid-column:2;grid-row:2}
+  .bento .d{grid-column:1/3;grid-row:3}
+}
+@media (max-width:700px){
+  .chip{display:none}
+  .hero h1{font-size:clamp(2.3rem,10vw,3rem)}
+  .btn{width:100%}
+  .nav .btn,.dock .btn,.lk,.rev .acts .btn,.btn.auto{width:auto}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .hero-cta .btn{width:100%}
+  .plist li{flex-wrap:wrap}.plist .l{display:none}.plist .p{margin-left:auto}.plist .n{max-width:none;flex:1 1 60%}
+  .head .btn{width:auto}
+  .facts div{grid-template-columns:1fr;gap:.3rem}
+  .vis{grid-template-columns:1fr .7fr}
+  body{padding-bottom:78px}
+  .dock .btn{width:100%}
+  .lb .pv,.lb .nx{top:auto;bottom:1rem;margin:0}
+  .lb .pv{left:1rem}.lb .nx{right:1rem}
+}
+
+/* acciones rápidas */
+.qa{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:2rem;max-width:620px}
+.q{display:flex;align-items:center;gap:.9rem;min-height:72px;padding:.9rem 1.1rem;border-radius:20px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);transition:transform 160ms var(--ease),border-color 200ms var(--ease),background-color 200ms var(--ease)}
+.q:active{transform:scale(.97)}
+.q .qi{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(201,166,97,.14);color:var(--gold2);flex:none}
+.q .qi svg{width:22px;height:22px}
+.q b{display:block;font:500 1.12rem/1.2 var(--display);letter-spacing:-.01em}
+.q small{display:block;font-size:.82rem;color:var(--mute);line-height:1.3;margin-top:.15rem}
+.q.main{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+.q.main .qi{background:rgba(26,20,14,.12);color:var(--on-gold)}
+.q.main small{color:rgba(26,20,14,.72)}
+@media (hover:hover) and (pointer:fine){.q:not(.main):hover{border-color:var(--gold);background:var(--surface);transform:translateY(-1px)}.q.main:hover{background:var(--gold2);transform:translateY(-1px)}}
+.hero .vis{align-self:center}
+@media (max-width:700px){.qa{grid-template-columns:1fr}.hero h1{font-size:clamp(2.8rem,14vw,3.6rem)}.q{min-height:64px}}
+
+.heromob{margin-top:1.4rem}
+
+/* portada con foto */
+.hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;background:var(--bg)}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:55% 64%;transform-origin:70% 60%;filter:brightness(1.18) saturate(1.12);animation:kb 30s ease-in-out infinite alternate}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,10,8,.9) 0%,rgba(14,10,8,.66) 40%,rgba(14,10,8,.12) 78%,rgba(14,10,8,0) 100%),linear-gradient(to top,var(--bg) 0%,rgba(20,16,13,0) 28%)}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.06)}}
+.hero-in{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end}
+.hero-copy{max-width:760px}
+.hero .lede{max-width:46ch;font-size:1.2rem;color:#e6dccd}
+.hero .seal{width:clamp(150px,13vw,200px);align-self:end}
+.hero .q{background:rgba(20,16,13,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:rgba(243,235,223,.2)}
+.hero .q.main{background:var(--gold);border-color:var(--gold)}
+@media (hover:hover) and (pointer:fine){.hero .q:not(.main):hover{background:rgba(34,26,21,.78)}}
+@media (max-width:1000px){.hero-in{grid-template-columns:1fr}.hero{padding-top:235px}.hero .seal{position:absolute;top:7.6rem;right:1rem;width:92px;z-index:1}.hero .seal text{font-size:12px}.hero-bg::after{background:linear-gradient(to top,rgba(14,10,8,.96) 0%,rgba(14,10,8,.78) 55%,rgba(14,10,8,.45) 100%)}.hero-bg img{object-position:68% 50%}}
+@media (max-width:700px){.hero{min-height:100dvh}}
+
+/* bandas de foto */
+.band{position:relative;isolation:isolate;display:grid;align-items:end;min-height:clamp(360px,44vw,560px);padding-block:clamp(2.5rem,5vw,4.5rem);overflow:hidden}
+.band.tall{min-height:clamp(420px,50vw,620px)}
+.band>img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover}
+.band::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(14,10,8,.92) 0%,rgba(14,10,8,.55) 45%,rgba(14,10,8,.18) 100%)}
+.band h2{font-size:clamp(2.4rem,6.4vw,5.4rem);max-width:15ch;margin-block:1rem 1rem;line-height:1}
+.band .lede{color:#e6dccd;font-size:1.12rem}
+.band .acts{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.6rem}
+@media (max-width:700px){.band .acts .btn{width:auto}}
+
+/* carta: lista y foto de la carta impresa */
+.cgrid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(1.6rem,4vw,4rem);align-items:start}
+.cleft{min-width:0}
+.panel{display:block}
+.pph{display:grid;gap:.7rem;width:100%;cursor:zoom-in;position:sticky;top:136px;text-align:center}
+.pph .ph{display:block;aspect-ratio:1080/1551}
+.pph img{object-fit:cover}
+.pph .hint{font-size:.88rem;color:#4a3f35}
+@media (max-width:1000px){.cgrid{grid-template-columns:1fr}.pph{position:static;max-width:380px;margin-inline:auto}}
+@media (min-width:1001px){.tabs{flex-wrap:wrap;overflow:visible}}
+
+/* platos estrella */
+.stars2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2.4vw,2rem);align-items:start}
+.star .ph{display:block;width:100%;aspect-ratio:1;padding:0;cursor:zoom-in;border-radius:28px}
+.star .meta{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-top:1.1rem}
+.star h3{font-size:clamp(1.6rem,2.8vw,2.4rem);line-height:1.1}
+.star p{margin:.4rem 0 0;font-size:.98rem}
+.tag{display:inline-block;margin-bottom:.6rem;font:500 .74rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.price{flex:none;padding:.55rem 1.05rem;border-radius:999px;background:var(--gold);color:var(--on-gold);font:600 1.15rem/1 var(--display);font-variant-numeric:tabular-nums}
+@media (max-width:800px){.stars2{grid-template-columns:1fr}.star:not(.big) .ph{aspect-ratio:1}}
+
+/* progreso de scroll */
+#prog{position:fixed;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:0 50%;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:60;pointer-events:none}
+/* buscador */
+.csearch{position:relative;display:flex;align-items:center;margin-bottom:1rem}
+.csearch svg{position:absolute;left:1rem;width:20px;height:20px;color:#6b5a45;pointer-events:none}
+.csearch input{width:100%;height:50px;border-radius:99px;border:1px solid rgba(60,45,30,.28);background:rgba(255,255,255,.55);padding:0 3rem;font:400 1rem var(--body);color:#2a2018;transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}
+.csearch input::placeholder{color:#7a6a55}
+.csearch input:focus{outline:none;border-color:#9a7a3a;box-shadow:0 0 0 3px rgba(201,166,97,.35)}
+.csearch input::-webkit-search-cancel-button{display:none}
+.csearch button{position:absolute;right:.5rem;width:40px;height:40px;border-radius:50%;border:0;background:transparent;font-size:1.6rem;line-height:1;color:#6b5a45;cursor:pointer}
+.cres{margin-bottom:1.4rem}
+.cres h3{font:400 1.5rem var(--serif);color:#2a2018;margin-bottom:.8rem}
+.cres ul{list-style:none;display:grid;gap:.1rem}
+.cres li{display:grid;grid-template-columns:1fr auto;gap:.2rem 1rem;padding:.7rem 0;border-bottom:1px solid rgba(60,45,30,.18)}
+.cres li .n{color:#2a2018;font-weight:500}.cres li .p{color:#7a5a1c;font-weight:600;font-variant-numeric:tabular-nums}
+.cres li small{grid-column:1/-1;color:#6b5a45;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.cres mark{background:rgba(201,166,97,.45);color:inherit;border-radius:3px;padding:0 2px}
+.cres .none{color:#5a4a36}
+/* selector de reserva */
+.picker{display:grid;gap:1rem;margin-block:1.6rem 1.8rem;max-width:640px;padding:1.4rem;border-radius:22px;background:rgba(28,22,17,.08);border:1px solid rgba(28,22,17,.2)}
+.pk-row{display:grid;gap:.55rem}
+.pk-l{font:600 .78rem var(--body);letter-spacing:.2em;text-transform:uppercase;color:#1c1611}
+.step{display:inline-flex;align-items:center;gap:.4rem;background:#1c1611;border-radius:99px;padding:.3rem;width:max-content}
+.step button{width:46px;height:46px;border-radius:50%;border:0;background:#d8b36a;color:#1c1611;font-size:1.5rem;font-weight:600;cursor:pointer;transition:transform .16s var(--ease)}
+.step button:active{transform:scale(.92)}
+.step output{min-width:3.2rem;text-align:center;color:#f3ebdf;font:500 1.4rem var(--serif);font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chips button{min-height:44px;padding:.4rem 1rem;border-radius:99px;border:1px solid rgba(28,22,17,.4);background:transparent;color:#1c1611;font:500 .95rem var(--body);cursor:pointer;transition:background-color .2s var(--ease),color .2s var(--ease),transform .16s var(--ease)}
+.chips button:active{transform:scale(.96)}
+.chips button[aria-checked="true"]{background:#1c1611;color:#f3ebdf;border-color:#1c1611}
+@media (hover:hover) and (pointer:fine){.chips button:not([aria-checked="true"]):hover{background:rgba(28,22,17,.1)}}
+.pk-sum{font:400 1.05rem/1.4 var(--serif);color:#1c1611;min-height:1.4em}
+.cres ul{padding:0;margin:0}.cres li{padding-inline:0;margin:0}.cres li::before{display:none}
+
+/* resultados y selector: entrada suave (ease-out, <300ms) */
+.cres:not([hidden]) li{animation:pin 220ms var(--ease) both;animation-delay:calc(var(--i,0)*35ms)}
+.cres:not([hidden]) h3{animation:pin 200ms var(--ease) both}
+.chips button,.step button,.csearch button,.tab{-webkit-tap-highlight-color:transparent}
+@media (prefers-reduced-motion:reduce){.cres li,.cres h3{animation:none}}
+
+</style>
+
+<div id="prog" aria-hidden="true"></div><header class="nav"><div class="wrap nav-in">
+  <a class="brand" href="#top" aria-label="Bulebar Entrenúcleos, inicio"><img src="img/logo.png" width="42" height="42" alt=""><span>Bulebar</span></a>
+  <span class="pill status" data-status><span class="dot"></span><span class="st">Comprobando horario</span></span>
+  <a class="btn pri" href="https://wa.me/34630112791?text=Hola%2C%20quer%C3%ADa%20reservar%20una%20mesa%20en%20Bulebar." target="_blank" rel="noopener">Reservar</a>
+</div>
+<div class="wrap"><nav class="secbar" aria-label="Ir a un apartado"><a href="#inicio">Inicio</a><a href="#estrellas">Estrellas</a><a href="#carta">Carta</a><a href="#casa">La casa</a><a href="#reservar">Reservar</a><a href="#opiniones">Opiniones</a><a href="#visitanos">Cómo llegar</a></nav></div></header>
+
+<main id="top">
+<section class="hero" id="inicio">
+  <div class="hero-bg" aria-hidden="true"><img src="img/hero.jpg" srcset="img/hero-m.jpg 900w, img/hero.jpg 1600w" sizes="100vw" width="1600" height="1594" alt="" fetchpriority="high" decoding="async"></div>
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <span class="eyebrow rv">Bar de tapas · Dos Hermanas</span>
+      <h1 class="rv">Bulebar <em>Entrenúcleos</em></h1>
+      <p class="lede rv">Desayunos desde primera hora, tapas de siempre y pescado fresco. Terraza al sol y salón para quedarse.</p>
+      <span class="status heromob rv" data-status><span class="dot"></span><span class="st">Comprobando horario</span></span>
+      <div class="qa rv">
+        <a class="q main" href="#carta"><span class="qi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg></span><span><b>Ver la carta</b><small>Precios y fotos de los platos</small></span></a>
+        <a class="q" href="https://wa.me/34630112791?text=Hola%2C%20quer%C3%ADa%20reservar%20una%20mesa%20en%20Bulebar." target="_blank" rel="noopener"><span class="qi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span><b>Reservar</b><small>Por WhatsApp</small></span></a>
+        <a class="q" href="tel:+34630112791"><span class="qi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><span><b>Llamar</b><small>630 11 27 91</small></span></a>
+        <a class="q" href="https://maps.app.goo.gl/KX6sudf5wosfaT4m8" target="_blank" rel="noopener"><span class="qi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.800 12 21 12 21z"/><circle cx="12" cy="9.500" r="2.500"/></svg></span><span><b>Cómo llegar</b><small>Avda. Felipe González, 10</small></span></a>
+      </div>
+    </div>
+    <div class="seal rv"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="sc" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#sc" textLength="496" lengthAdjust="spacing">DESAYUNOS · TAPAS · TERRAZA · DOS HERMANAS · </textPath></text></svg><img src="img/logo.png" width="480" height="480" alt="Logo de Bulebar"></div>
+  </div>
+</section>
+
+<section class="marq" aria-label="Fotos de platos de la carta"><div class="mrow"><div class="mtrack"><div class="mi"><img src="img/m/d01.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d02.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d03.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d04.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d05.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d06.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d07.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d08.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d09.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d10.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d11.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d12.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d01.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d02.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d03.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d04.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d05.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d06.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d07.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d08.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d09.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d10.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d11.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d12.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div></div></div><div class="mrow rev"><div class="mtrack"><div class="mi"><img src="img/m/d13.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d14.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d15.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d16.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d17.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d18.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d19.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d20.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d21.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d22.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d23.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d24.jpg" width="560" height="420" alt="" loading="lazy"></div><div class="mi"><img src="img/m/d13.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d14.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d15.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d16.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d17.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d18.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d19.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d20.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d21.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d22.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d23.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div><div class="mi"><img src="img/m/d24.jpg" width="560" height="420" alt="" loading="lazy" aria-hidden="true"></div></div></div></section>
+<div class="strip"><div class="wrap strip-grid">
+  <div class="cell rv" data-status><small>Ahora</small><b class="st">Comprobando horario</b><span>Consulta el horario completo más abajo.</span></div>
+  <div class="cell rv"><small>Dónde</small><b>Avda. Felipe González Márquez, 10</b><a class="lk" href="https://maps.app.goo.gl/KX6sudf5wosfaT4m8" target="_blank" rel="noopener">Cómo llegar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  <div class="cell rv"><small>Llámanos</small><b>630 11 27 91</b><a class="lk" href="tel:+34630112791">Llamar ahora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div></div>
+
+<section id="estrellas"><div class="wrap">
+  <div class="head"><div data-stagger><span class="eyebrow rv">Imprescindibles</span><h2 class="rv">Dos platos que no te puedes perder</h2></div><a class="lk rv" href="#carta">Ver toda la carta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  <div class="stars2" data-stagger>
+    <article class="star big rv"><button class="ph" type="button" data-lb="img/tosta-atun.jpg" data-alt="Tosta de atún rojo con mayonesa de trufa" data-cap="Tosta de atún rojo" aria-label="Ampliar foto de la tosta de atún rojo"><img src="img/tosta-atun.jpg" width="1000" height="1000" alt="Tosta de atún rojo con base de mayonesa de trufa" loading="lazy"></button><div class="meta"><div><span class="tag">Entre panes</span><h3>Tosta de atún rojo</h3><p>Con base de mayonesa de trufa.</p></div><span class="price">6,00 €</span></div></article>
+    <article class="star rv"><button class="ph" type="button" data-lb="img/arroz.jpg" data-alt="Arroz de la casa" data-cap="El arroz de la casa" aria-label="Ampliar foto del arroz"><img src="img/arroz.jpg" width="1000" height="1000" alt="Arroz en paellera negra" loading="lazy"></button><div class="meta"><div><span class="tag">Tapas</span><h3>Arroz</h3><p>Pregunta al camarero por disponibilidad.</p></div><span class="price">10,00 €</span></div></article>
+  </div>
+</div></section>
+
+<section id="carta" class="paper"><div class="wrap">
+  <div class="head"><div data-stagger><span class="eyebrow rv">La carta</span><h2 class="rv">Todo lo que sale de nuestra cocina</h2></div>
+    <button class="btn dk rv" type="button" data-lb="img/carta.jpg" data-alt="Carta impresa de Bulebar Entrenúcleos" data-cap="La carta completa">Ver la carta impresa</button></div>
+  <div class="cgrid"><div class="cleft"><div class="csearch rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4-4"/></svg><input id="cq" type="search" placeholder="Buscar un plato…" aria-label="Buscar un plato en la carta" autocomplete="off"><button type="button" id="cqx" aria-label="Borrar búsqueda" hidden>&times;</button></div><div id="cres" class="cres" hidden></div>
+  <div class="tabs rv" role="tablist" aria-label="Secciones de la carta"><button class="tab" role="tab" id="t-tapas" aria-controls="p-tapas" aria-selected="true" tabindex="0" type="button">Tapas</button><button class="tab" role="tab" id="t-entrantes" aria-controls="p-entrantes" aria-selected="false" tabindex="-1" type="button">Entrantes</button><button class="tab" role="tab" id="t-mar" aria-controls="p-mar" aria-selected="false" tabindex="-1" type="button">Frutos del mar</button><button class="tab" role="tab" id="t-panes" aria-controls="p-panes" aria-selected="false" tabindex="-1" type="button">Entre panes</button><button class="tab" role="tab" id="t-huevos" aria-controls="p-huevos" aria-selected="false" tabindex="-1" type="button">Por huevos</button><button class="tab" role="tab" id="t-carnes" aria-controls="p-carnes" aria-selected="false" tabindex="-1" type="button">Carnes</button><button class="tab" role="tab" id="t-postres" aria-controls="p-postres" aria-selected="false" tabindex="-1" type="button">Postres</button></div>
+  <div class="panels"><div class="panel" id="p-tapas" role="tabpanel" aria-labelledby="t-tapas"><div class="plist"><h3>Tapas de la casa</h3><ul><li style="--i:0"><span class="n">Croquetas de la abuela</span><span class="l"></span><span class="p">3,80 / 7,80</span></li><li style="--i:1"><span class="n">Croquetas caseras de queso viejo</span><span class="l"></span><span class="p">4,20 / 8,40</span></li><li style="--i:2"><span class="n">Gyozas de pollo y verduras</span><span class="l"></span><span class="p">7,80</span></li><li style="--i:3"><span class="n">Santiaguito relleno de jamón, queso y pimiento</span><span class="l"></span><span class="p">8,00</span></li><li style="--i:4"><span class="n">Wok de arroz con pechuga de pollo y verduras</span><span class="l"></span><span class="p">8,50</span></li><li style="--i:5"><span class="n">Canelón casero de carne con base de lechuga y salsa de almendras</span><span class="l"></span><span class="p">8,50</span></li><li style="--i:6"><span class="n">Flor de alcachofa con salsa verde y velos de jamón</span><span class="l"></span><span class="p">6,00</span></li><li style="--i:7"><span class="n">Delicias de pollo con patatas</span><span class="l"></span><span class="p">4,00 / 8,00</span></li><li style="--i:8"><span class="n">Tacos de carne deshilachada y verduras</span><span class="l"></span><span class="p">11,00</span></li><li style="--i:9"><span class="n">Arroz (pregunta al camarero por disponibilidad)</span><span class="l"></span><span class="p">10,00</span></li></ul></div></div><div class="panel" id="p-entrantes" role="tabpanel" aria-labelledby="t-entrantes" hidden><div class="plist"><h3>Para ir abriendo boca</h3><ul><li style="--i:0"><span class="n">Jamón ibérico cebo de campo 50%</span><span class="l"></span><span class="p">18,00</span></li><li style="--i:1"><span class="n">Queso viejo</span><span class="l"></span><span class="p">14,00</span></li><li style="--i:2"><span class="n">Tabla de quesos curado en manteca y aceite</span><span class="l"></span><span class="p">16,00</span></li><li style="--i:3"><span class="n">Ensaladilla de melva canutera con cebolla crujiente</span><span class="l"></span><span class="p">3,80 / 7,80</span></li><li style="--i:4"><span class="n">Patatas bravas &quot;salsa casera&quot;</span><span class="l"></span><span class="p">3,80 / 7,80</span></li><li style="--i:5"><span class="n">Tomate aliñado con melva canutera y vinagre de Módena</span><span class="l"></span><span class="p">8,00</span></li><li style="--i:6"><span class="n">Aceitunas gordales &quot;cachondita picantona&quot;</span><span class="l"></span><span class="p">2,20</span></li></ul></div></div><div class="panel" id="p-mar" role="tabpanel" aria-labelledby="t-mar" hidden><div class="plist"><h3>Del mar a la mesa</h3><ul><li style="--i:0"><span class="n">Chocos fritos</span><span class="l"></span><span class="p">4,50 / 12,00</span></li><li style="--i:1"><span class="n">Bacalao confitado con verduritas poché</span><span class="l"></span><span class="p">4,50 / 13,50</span></li><li style="--i:2"><span class="n">Atún rojo con mayonesa de soja y verduritas</span><span class="l"></span><span class="p">12,00</span></li></ul></div></div><div class="panel" id="p-panes" role="tabpanel" aria-labelledby="t-panes" hidden><div class="plist"><h3>Tostas y montaditos</h3><ul><li style="--i:0"><span class="n">Pan brioche relleno de carne deshilachada, verduras y huevo</span><span class="l"></span><span class="p">5,00</span></li><li style="--i:1"><span class="n">Tosta de atún rojo con base de mayonesa de trufa</span><span class="l"></span><span class="p">6,00</span></li><li style="--i:2"><span class="n">Tosta tomate, guacamole casero y melva canutera</span><span class="l"></span><span class="p">8,80</span></li><li style="--i:3"><span class="n">Serranito de siempre</span><span class="l"></span><span class="p">7,80</span></li><li style="--i:4"><span class="n">Montadito solomillo y jamón</span><span class="l"></span><span class="p">4,00</span></li><li style="--i:5"><span class="n">Montadito piripi</span><span class="l"></span><span class="p">4,10</span></li><li style="--i:6"><span class="n">Mantecaíto</span><span class="l"></span><span class="p">4,00</span></li></ul></div></div><div class="panel" id="p-huevos" role="tabpanel" aria-labelledby="t-huevos" hidden><div class="plist"><h3>Huevos y revueltos</h3><ul><li style="--i:0"><span class="n">Huevos rotos con patatas y jamón ibérico</span><span class="l"></span><span class="p">8,00</span></li><li style="--i:1"><span class="n">Revuelto de la casa</span><span class="l"></span><span class="p">9,70</span></li><li style="--i:2"><span class="n">Revuelto bacalao</span><span class="l"></span><span class="p">9,70</span></li></ul></div></div><div class="panel" id="p-carnes" role="tabpanel" aria-labelledby="t-carnes" hidden><div class="plist"><h3>A la plancha</h3><ul><li style="--i:0"><span class="n">Presa ibérica</span><span class="l"></span><span class="p">14,00</span></li><li style="--i:1"><span class="n">Solomillo al whisky</span><span class="l"></span><span class="p">4,20 / 9,00</span></li><li style="--i:2"><span class="n">Solomillo carbonara</span><span class="l"></span><span class="p">4,20 / 9,00</span></li><li style="--i:3"><span class="n">Surtido de ibéricos (presa, solomillo y secreto)</span><span class="l"></span><span class="p">18,50</span></li><li style="--i:4"><span class="n">Entrecot de ternera 300 gr</span><span class="l"></span><span class="p">15,00</span></li><li style="--i:5"><span class="n">Chuletón de ternera 100 gr</span><span class="l"></span><span class="p">5,50</span></li></ul></div></div><div class="panel" id="p-postres" role="tabpanel" aria-labelledby="t-postres" hidden><div class="plist"><h3>El final perfecto para tu comida</h3><p class="post">Pregunta al camarero y descubre nuestras delicias secretas.</p><p class="post small">Servicio de pan y picos 1,00 €</p></div></div></div></div>
+  <button class="pph rv" type="button" data-lb="img/carta.jpg" data-alt="Carta impresa de Bulebar Entrenúcleos" data-cap="La carta completa" aria-label="Ampliar la carta impresa"><span class="ph"><img src="img/carta.jpg" width="1080" height="1551" alt="Carta impresa de Bulebar Entrenúcleos" loading="lazy"></span><span class="hint">Toca para ampliar la carta</span></button></div>
+  <p class="legend rv">Cuando hay dos precios, el primero es la tapa y el segundo la ración. Servicio de pan y picos 1,00 €.</p>
+</div></section>
+
+<section id="casa"><div class="wrap story">
+  <button class="ph rv" type="button" data-lb="img/salon-mesa.jpg" data-alt="Mesa larga del salón de Bulebar" data-cap="El salón ampliado" aria-label="Ampliar foto del salón"><img src="img/salon-mesa.jpg" width="1170" height="1349" alt="Mesa larga y sillas de terciopelo en el salón de Bulebar"></button>
+  <div data-stagger>
+    <span class="eyebrow rv">La casa</span>
+    <h2 class="rv">Un rincón de siempre en el barrio nuevo</h2>
+    <p class="lede rv">Entrenúcleos ha crecido rápido, y Bulebar se ha convertido en el punto de encuentro del barrio: el sitio del desayuno antes de entrar a trabajar, la caña de después y la mesa larga de los domingos.</p>
+    <p class="lede rv">Entre semana o fin de semana, en la terraza al sol o en el salón interior, siempre hay sitio para uno más.</p>
+    <dl class="facts rv">
+      <div><dt>Cocina casera</dt><dd>Producto fresco y todo hecho en casa, con el atún y el bacalao como protagonistas.</dd></div>
+      <div><dt>Terraza</dt><dd>Al aire libre y también cubierta en invierno. Se puede ir con perro.</dd></div>
+      <div><dt>Salón ampliado</dt><dd>Más espacio para comidas y cenas, con mesa larga para grupos.</dd></div>
+    </dl>
+  </div>
+</div></section>
+
+<section id="reservar" class="gold"><div class="wrap book">
+  <div data-stagger>
+    <span class="eyebrow rv">Reservar</span>
+    <h2 class="rv">¿Mesa para hoy?</h2>
+    <p class="lede rv">Escríbenos por WhatsApp y te confirmamos en cuanto lo veamos. Para desayunos, comidas y cenas de viernes y sábado.</p>
+  </div>
+  <div class="picker rv" id="picker">
+    <div class="pk-row"><span class="pk-l">Personas</span><div class="step"><button type="button" id="pm" aria-label="Menos personas">&minus;</button><output id="pn" aria-live="polite">2</output><button type="button" id="pp" aria-label="Más personas">+</button></div></div>
+    <div class="pk-row"><span class="pk-l">Día</span><div class="chips" id="pdays" role="radiogroup" aria-label="Día"></div></div>
+    <div class="pk-row"><span class="pk-l">Hora</span><div class="chips" id="ptimes" role="radiogroup" aria-label="Hora"></div></div>
+    <p class="pk-sum" id="psum" aria-live="polite"></p>
+  </div>
+  <div class="bk-act rv"><a class="btn dk big" id="wabtn" href="https://wa.me/34630112791?text=Hola%2C%20quer%C3%ADa%20reservar%20una%20mesa%20en%20Bulebar." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg> Reservar por WhatsApp</a><a class="btn dko big" href="tel:+34630112791"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> Llamar al 630 11 27 91</a>
+    <span class="status" data-status><span class="dot"></span><span class="st">Comprobando horario</span></span></div>
+</div></section>
+
+<section id="opiniones"><div class="wrap rev">
+  <div class="rv"><div class="score">4,2</div><div class="stars" aria-label="4,2 de 5 estrellas">★★★★★<i aria-hidden="true">★★★★★</i></div><p class="cnt">122 opiniones en Google</p></div>
+  <div class="rv"><blockquote>“La terraza es un planazo para tomar algo al sol, hasta con el perro.”</blockquote>
+    <div class="acts"><a class="btn pri" href="https://www.google.com/maps/place/Bar+Bulebar/@37.3089759,-5.9375156,17z/data=!4m8!3m7!1s0xd1271001f5c2e75:0x1cd7009af16469ac!8m2!3d37.3089717!4d-5.9349407!9m1!1b1!16s%2Fg%2F11lchh68cf" target="_blank" rel="noopener">Déjanos tu opinión</a><a class="btn" href="https://www.google.com/maps/place/Bar+Bulebar/@37.3089759,-5.9375156,17z/data=!4m8!3m7!1s0xd1271001f5c2e75:0x1cd7009af16469ac!8m2!3d37.3089717!4d-5.9349407!9m1!1b1!16s%2Fg%2F11lchh68cf" target="_blank" rel="noopener">Ver todas las opiniones</a></div></div>
+</div></section>
+
+<section id="visitanos" class="bg2" style="padding-block:0">
+  <div class="band tall"><img src="img/entrada.jpg" width="1170" height="408" alt="Entrada de Bulebar con terraza" loading="lazy"><div class="wrap" data-stagger><span class="eyebrow rv">Visítanos</span><h2 class="rv">Te esperamos en Entrenúcleos</h2><p class="lede rv">Avda. Felipe González Márquez, 10, Local 6 · 41704 Dos Hermanas, Sevilla</p><div class="acts rv"><a class="btn pri" href="https://maps.app.goo.gl/KX6sudf5wosfaT4m8" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.800 12 21 12 21z"/><circle cx="12" cy="9.500" r="2.500"/></svg> Cómo llegar</a><a class="btn" href="tel:+34630112791"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> Llamar</a></div></div></div>
+  <div class="wrap" style="padding-block:clamp(3rem,6vw,5rem)">
+  <div class="visit" data-stagger>
+    <div class="rv"><h3>Horario</h3><table class="hours"><tbody><tr data-day="1"><th scope="row">Lunes<span class="tg" hidden>Hoy</span></th><td>Cerrado</td></tr><tr data-days="2,3,4"><th scope="row">Martes a jueves<span class="tg" hidden>Hoy</span></th><td>07:00 – 17:00</td></tr><tr data-day="5"><th scope="row">Viernes<span class="tg" hidden>Hoy</span></th><td>07:00 – 17:00<br>20:00 – 00:00</td></tr><tr data-day="6"><th scope="row">Sábado<span class="tg" hidden>Hoy</span></th><td>08:30 – 17:00<br>20:00 – 00:00</td></tr><tr data-day="0"><th scope="row">Domingo<span class="tg" hidden>Hoy</span></th><td>08:30 – 17:00</td></tr></tbody></table></div>
+    <div class="rv"><h3>Contacto</h3><div class="stack"><span class="tel" id="tel-text">630 11 27 91</span>
+      <button class="lk" id="copy-tel" type="button" data-copy="630112791">Copiar número</button><p class="copyok" id="copy-ok" role="status"></p>
+      <a class="lk" href="https://wa.me/34630112791" target="_blank" rel="noopener">Escribir por WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="lk" href="https://www.instagram.com/bulebar_entrenucleos/" target="_blank" rel="noopener">@bulebar_entrenucleos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+    <div class="rv"><h3>Dirección</h3><address>Avda. Felipe González Márquez, 10, Local 6<br>41704 Dos Hermanas, Sevilla</address><a class="lk" href="https://maps.app.goo.gl/KX6sudf5wosfaT4m8" target="_blank" rel="noopener">Abrir en Google Maps <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div></div>
+</section>
+</main>
+
+<footer><div class="wrap foot">
+  <div class="fbrand"><img src="img/logo.png" width="30" height="30" alt=""><span>Bulebar Entrenúcleos · Dos Hermanas</span></div>
+  <nav aria-label="Enlaces"><a href="tel:+34630112791">630 11 27 91</a><a href="https://wa.me/34630112791" target="_blank" rel="noopener">WhatsApp</a><a href="https://www.instagram.com/bulebar_entrenucleos/" target="_blank" rel="noopener">Instagram</a><a href="https://maps.app.goo.gl/KX6sudf5wosfaT4m8" target="_blank" rel="noopener">Google Maps</a></nav>
+</div></footer>
+
+<div class="dock"><a class="btn" href="tel:+34630112791"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> Llamar</a><a class="btn" href="https://maps.app.goo.gl/KX6sudf5wosfaT4m8" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.800 12 21 12 21z"/><circle cx="12" cy="9.500" r="2.500"/></svg> Ir</a><a class="btn pri" href="https://wa.me/34630112791?text=Hola%2C%20quer%C3%ADa%20reservar%20una%20mesa%20en%20Bulebar." target="_blank" rel="noopener">Reservar</a></div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Visor de fotos">
+  <button class="x" type="button" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="pv" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+  <figure><img id="lb-img" src="" alt=""><figcaption id="lb-cap"></figcaption></figure>
+  <button class="nx" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+</div>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('js');
+
+  /* nav */
+  var nav=$('.nav');
+  var onScroll=function(){nav.classList.toggle('scrolled',window.scrollY>30)};
+  var tick=false;
+  window.addEventListener('scroll',function(){if(tick)return;tick=true;requestAnimationFrame(function(){onScroll();tick=false})},{passive:true});
+  onScroll();
+
+  /* aparición escalonada y sección activa */
+  $$('[data-stagger]').forEach(function(g){$$('.rv',g).forEach(function(el,i){el.style.setProperty('--i',Math.min(i,6))})});
+  $$('.hero .rv').forEach(function(el,i){el.style.setProperty('--i',i)});
+  var links=$$('.secbar a');
+  if('IntersectionObserver' in window){
+    var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    $$('.rv').forEach(function(el){ro.observe(el)});
+    var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.setAttribute('aria-current',l.getAttribute('href')==='#'+e.target.id?'true':'false')})}})},{rootMargin:'-45% 0px -50% 0px'});
+    $$('main section[id]').forEach(function(s){so.observe(s)});
+    var bar=$('.secbar');if(bar)new MutationObserver(function(){var a=$('[aria-current="true"]',bar);if(a&&bar.scrollWidth>bar.clientWidth)bar.scrollTo({left:a.offsetLeft-bar.clientWidth/2+a.offsetWidth/2,behavior:reduce?'auto':'smooth'})}).observe(bar,{attributes:true,subtree:true,attributeFilter:['aria-current']});
+  }else{$$('.rv').forEach(function(el){el.classList.add('in')})}
+
+  /* horario y estado (hora de Madrid) */
+  var H={0:[[8.5,17]],1:[],2:[[7,17]],3:[[7,17]],4:[[7,17]],5:[[7,17],[20,24]],6:[[8.5,17],[20,24]]};
+  var DN=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  var p2=function(n){return (n<10?'0':'')+n};
+  var hh=function(h){h=h%24;var m=Math.round((h%1)*60);return p2(Math.floor(h))+':'+p2(m)};
+  function madrid(){
+    try{
+      var p=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Madrid',weekday:'short',hour:'numeric',minute:'numeric',hourCycle:'h23'}).formatToParts(new Date());
+      var o={};p.forEach(function(x){o[x.type]=x.value});
+      return {d:{Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[o.weekday],t:(+o.hour%24)+(+o.minute)/60};
+    }catch(e){var n=new Date();return {d:n.getDay(),t:n.getHours()+n.getMinutes()/60}}
+  }
+  function status(){
+    var n=madrid(),sl=H[n.d],txt,open=false,i,k;
+    for(i=0;i<sl.length;i++){if(n.t>=sl[i][0]&&n.t<sl[i][1]){open=true;txt='Abierto ahora · hasta las '+hh(sl[i][1]);break}}
+    if(!open){
+      for(k=0;k<8&&!txt;k++){
+        var dd=(n.d+k)%7,s2=H[dd];
+        for(i=0;i<s2.length;i++){
+          if(k>0||s2[i][0]>n.t){txt='Cerrado ahora · abre '+(k===0?'hoy':k===1?'mañana':'el '+DN[dd])+' a las '+hh(s2[i][0]);break}
+        }
+      }
+    }
+    $$('[data-status]').forEach(function(el){el.classList.remove('open','closed');el.classList.add(open?'open':'closed');var s=$('.st',el);if(s)s.textContent=txt});
+    $$('.hours tr').forEach(function(r){var t=+r.getAttribute('data-day')===n.d||(r.getAttribute('data-days')||'').split(',').indexOf(String(n.d))>-1;r.classList.toggle('today',t);var tg=$('.tg',r);if(tg)tg.hidden=!t});
+  }
+  status();setInterval(status,60000);
+
+  /* copiar teléfono */
+  var cb=$('#copy-tel'),ok=$('#copy-ok');
+  if(cb)cb.addEventListener('click',function(){
+    var v=cb.getAttribute('data-copy');
+    var done=function(m){ok.textContent=m;setTimeout(function(){ok.textContent=''},2600)};
+    var fb=function(){var r=document.createRange();r.selectNodeContents($('#tel-text'));var s=getSelection();s.removeAllRanges();s.addRange(r);done('Selecciona y copia el número')};
+    try{navigator.clipboard.writeText(v).then(function(){done('Número copiado')},fb)}catch(e){fb()}
+  });
+
+  /* carrusel */
+  var rail=$('#rail'),rp=$('#r-prev'),rn=$('#r-next');
+  function railState(){if(!rail)return;rp.disabled=rail.scrollLeft<4;rn.disabled=rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-4}
+  if(rail){
+    var step=function(d){rail.scrollBy({left:d*Math.max(280,rail.clientWidth*.6),behavior:reduce?'auto':'smooth'})};
+    rp.addEventListener('click',function(){step(-1)});rn.addEventListener('click',function(){step(1)});
+    rail.addEventListener('scroll',function(){requestAnimationFrame(railState)},{passive:true});
+    window.addEventListener('resize',railState);railState();
+  }
+
+  /* carta: pestañas */
+  var tabs=$$('.tab'),panels=$$('.panel');
+  function pick(t,focus){
+    tabs.forEach(function(b){b.setAttribute('aria-selected',b===t);b.tabIndex=b===t?0:-1});
+    panels.forEach(function(p){
+      var on=p.id===t.getAttribute('aria-controls');
+      if(on&&p.hidden){p.hidden=false;p.classList.remove('enter');void p.offsetWidth;if(!reduce)p.classList.add('enter')}
+      else if(!on){p.hidden=true;p.classList.remove('enter')}
+    });
+    if(focus)t.focus();
+    try{t.scrollIntoView({inline:'center',block:'nearest',behavior:reduce?'auto':'smooth'})}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){pick(t)});
+    t.addEventListener('keydown',function(e){
+      var n=null;
+      if(e.key==='ArrowRight')n=tabs[(i+1)%tabs.length];
+      if(e.key==='ArrowLeft')n=tabs[(i-1+tabs.length)%tabs.length];
+      if(e.key==='Home')n=tabs[0];if(e.key==='End')n=tabs[tabs.length-1];
+      if(n){e.preventDefault();pick(n,true)}
+    });
+  });
+
+  /* visor de fotos */
+  var items=$$('[data-lb]'),lb=$('#lb'),lbi=$('#lb-img'),lbc=$('#lb-cap'),cur=0,last=null;
+  function show(i){cur=(i+items.length)%items.length;var it=items[cur];lbi.src=it.getAttribute('data-lb');lbi.alt=it.getAttribute('data-alt')||'';lbc.textContent=it.getAttribute('data-cap')||''}
+  function openLb(i){last=document.activeElement;show(i);lb.hidden=false;void lb.offsetWidth;lb.classList.add('open');$('.x',lb).focus();document.body.style.overflow='hidden'}
+  function closeLb(){lb.classList.remove('open');document.body.style.overflow='';setTimeout(function(){lb.hidden=true},reduce?0:240);if(last)last.focus()}
+  items.forEach(function(g,i){g.addEventListener('click',function(){openLb(i)})});
+  $('.x',lb).addEventListener('click',closeLb);
+  $('.pv',lb).addEventListener('click',function(){show(cur-1)});
+  $('.nx',lb).addEventListener('click',function(){show(cur+1)});
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLb()});
+  document.addEventListener('keydown',function(e){
+    if(lb.hidden)return;
+    if(e.key==='Escape')closeLb();
+    if(e.key==='ArrowRight')show(cur+1);
+    if(e.key==='ArrowLeft')show(cur-1);
+  });
+})();
+
+/* progreso, buscador y selector de reserva */
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var pr=$('#prog'),tk=false;
+  function prog(){var h=document.documentElement.scrollHeight-innerHeight;pr.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')';tk=false}
+  addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(prog)}},{passive:true});prog();
+
+  /* buscador de platos */
+  var q=$('#cq'),x=$('#cqx'),res=$('#cres'),tabs=$('.tabs'),panels=$$('.panel');
+  var norm=function(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')};
+  var esc=function(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+  var items=[];
+  $$('.panel li').forEach(function(li){var pan=li.closest('.panel'),tab=$('[aria-controls="'+pan.id+'"]');items.push({n:$('.n',li).textContent,p:$('.p',li).textContent,c:tab?tab.textContent:''})});
+  function hl(t,qq){var i=norm(t).indexOf(qq);return i<0?esc(t):esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+qq.length))+'</mark>'+esc(t.slice(i+qq.length))}
+  function run(){
+    var v=norm(q.value.trim());x.hidden=!q.value;
+    if(v.length<2){res.hidden=true;tabs.hidden=false;var sel=$('.tab[aria-selected="true"]');panels.forEach(function(p){p.hidden=!(sel&&sel.getAttribute('aria-controls')===p.id)});return}
+    var m=items.filter(function(i){return norm(i.n).indexOf(v)>-1||norm(i.c).indexOf(v)>-1});
+    tabs.hidden=true;panels.forEach(function(p){p.hidden=true});res.hidden=false;
+    res.innerHTML='<h3>'+(m.length?m.length+(m.length>1?' platos':' plato'):'Sin resultados')+'</h3>'+(m.length?'<ul>'+m.map(function(i,k){return '<li style="--i:'+k+'"><span class="n">'+hl(i.n,v)+'</span><span class="p">'+esc(i.p)+'</span><small>'+esc(i.c)+'</small></li>'}).join('')+'</ul>':'<p class="none">Prueba con otra palabra, por ejemplo “atún”, “croquetas” o “huevos”.</p>');
+  }
+  if(q){q.addEventListener('input',run);x.addEventListener('click',function(){q.value='';run();q.focus()})}
+
+  /* selector de reserva -> WhatsApp */
+  var H={0:[[8.5,17]],1:[],2:[[7,17]],3:[[7,17]],4:[[7,17]],5:[[7,17],[20,24]],6:[[8.5,17],[20,24]]};
+  var WD=['dom','lun','mar','mié','jue','vie','sáb'],WDL=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'],MO=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var btn=$('#wabtn');if(!btn||!$('#picker'))return;
+  var base=btn.getAttribute('href').split('?')[0];
+  function nowM(){var p={};new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Madrid',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',hourCycle:'h23'}).formatToParts(new Date()).forEach(function(o){p[o.type]=+o.value});return p}
+  var n=nowM(),base0=new Date(Date.UTC(n.year,n.month-1,n.day));
+  var days=[];
+  for(var i=0;i<8&&days.length<6;i++){var d=new Date(base0.getTime()+i*864e5),w=d.getUTCDay();if(!H[w].length)continue;
+    var slots=[];H[w].forEach(function(r){for(var h=r[0];h<=r[1]-1+1e-9;h+=.5){if(h<12&&((h-r[0])%1)>1e-6)continue;if(i===0&&h<n.hour+n.minute/60+.5)continue;slots.push(h)}});
+    if(slots.length)days.push({i:i,w:w,d:d,slots:slots})}
+  var st={pp:2,day:0,t:0};
+  var dEl=$('#pdays'),tEl=$('#ptimes'),sum=$('#psum'),pn=$('#pn');
+  var fmt=function(h){var hh=Math.floor(h),mm=Math.round((h-hh)*60);return(hh<10?'0':'')+hh+':'+(mm?mm:'00')};
+  function lab(o){return o.i===0?'Hoy':o.i===1?'Mañana':WD[o.w]+' '+o.d.getUTCDate()}
+  function longDay(o){return o.i===0?'hoy':o.i===1?'mañana':'el '+WDL[o.w]+' '+o.d.getUTCDate()+' de '+MO[o.d.getUTCMonth()]}
+  function mk(el,arr,sel,cb){el.innerHTML='';arr.forEach(function(t,k){var b=document.createElement('button');b.type='button';b.setAttribute('role','radio');b.setAttribute('aria-checked',k===sel?'true':'false');b.textContent=t;b.addEventListener('click',function(){cb(k)});el.appendChild(b)})}
+  function draw(){
+    if(!days.length){sum.textContent='Escríbenos y te contamos.';return}
+    var D=days[st.day];mk(dEl,days.map(lab),st.day,function(k){st.day=k;st.t=0;draw()});
+    if(st.t>=D.slots.length)st.t=0;
+    mk(tEl,D.slots.map(fmt),st.t,function(k){st.t=k;draw()});
+    pn.textContent=st.pp;
+    var msg='Hola, quería reservar mesa en Bulebar para '+st.pp+(st.pp>1?' personas ':' persona ')+longDay(D)+' a las '+fmt(D.slots[st.t])+'. ¿Tenéis hueco?';
+    sum.textContent='Mesa para '+st.pp+', '+longDay(D)+' a las '+fmt(D.slots[st.t])+'.';
+    btn.setAttribute('href',base+'?text='+encodeURIComponent(msg));
+  }
+  $('#pm').addEventListener('click',function(){st.pp=Math.max(1,st.pp-1);draw()});
+  $('#pp').addEventListener('click',function(){st.pp=Math.min(14,st.pp+1);draw()});
+  draw();
+})();
+
+</script>
+
+</body></html>
