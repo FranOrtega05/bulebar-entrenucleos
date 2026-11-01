@@ -305,6 +305,24 @@ footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);
 @media (max-width:1000px){.hero-in{grid-template-columns:1fr}.hero{padding-top:235px}.hero .seal{position:absolute;top:7.6rem;right:1rem;width:92px;z-index:1}.hero .seal text{font-size:12px}.hero-bg::after{background:linear-gradient(to top,rgba(14,10,8,.96) 0%,rgba(14,10,8,.78) 55%,rgba(14,10,8,.45) 100%)}.hero-bg img{object-position:68% 50%}}
 @media (max-width:700px){.hero{min-height:100dvh}}
 
+/* portada con collage del local */
+.hero-warm{background:radial-gradient(70% 60% at 82% 38%,rgba(201,166,97,.2),transparent 70%),radial-gradient(60% 50% at 8% 100%,rgba(150,80,40,.18),transparent 70%),var(--bg)}
+.hero-warm::after{display:none}
+.hero-in{position:relative;grid-template-columns:1.05fr .95fr;align-items:center}
+.hp{position:relative;aspect-ratio:1/1.08;width:min(100%,520px);justify-self:end;margin-bottom:1rem}
+.hp figure{position:absolute;margin:0;overflow:hidden;border:1px solid rgba(243,235,223,.18);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.hp img{width:100%;height:100%;object-fit:cover;display:block}
+.hp-a{inset:0 22% 14% 0;border-radius:999px 999px 18px 18px}
+.hp-b{right:0;top:12%;width:42%;aspect-ratio:3/4;border-radius:18px}
+.hp-c{right:8%;bottom:0;width:44%;aspect-ratio:1;border-radius:50%;border:4px solid var(--bg)!important}
+.hero .seal{position:absolute;left:calc(50% + 70px);bottom:2.5rem;width:clamp(96px,9vw,132px);z-index:2}
+@media (max-width:1000px){
+  .hero-in{grid-template-columns:1fr}
+  .hero{padding-top:200px}
+  .hp{justify-self:center;width:min(100%,420px);margin-top:1.5rem}
+  .hero .seal{top:7.6rem;bottom:auto;left:auto;right:1rem;width:80px}
+}
+
 /* bandas de foto */
 .band{position:relative;isolation:isolate;display:grid;align-items:end;min-height:clamp(360px,44vw,560px);padding-block:clamp(2.5rem,5vw,4.5rem);overflow:hidden}
 .band.tall{min-height:clamp(420px,50vw,620px)}
@@ -427,7 +445,7 @@ footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);
 
 <main id="top">
 <section class="hero" id="inicio">
-  <div class="hero-bg" aria-hidden="true"><img src="img/hero.jpg" srcset="img/hero-m.jpg 900w, img/hero.jpg 1600w" sizes="100vw" width="1600" height="1594" alt="" fetchpriority="high" decoding="async"></div>
+  <div class="hero-bg hero-warm" aria-hidden="true"></div>
   <div class="wrap hero-in">
     <div class="hero-copy">
       <span class="eyebrow rv">Bar de tapas · Dos Hermanas</span>
@@ -440,6 +458,11 @@ footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);
         <a class="q" href="tel:+34630112791"><span class="qi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><span><b>Llamar</b><small>630 11 27 91</small></span></a>
         <a class="q" href="https://maps.app.goo.gl/KX6sudf5wosfaT4m8" target="_blank" rel="noopener"><span class="qi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.800 12 21 12 21z"/><circle cx="12" cy="9.500" r="2.500"/></svg></span><span><b>Cómo llegar</b><small>Avda. Felipe González, 10</small></span></a>
       </div>
+    </div>
+    <div class="hp rv">
+      <figure class="hp-a"><img src="img/ig/salon-2.jpg" width="1053" height="1400" alt="Salón de Bulebar con el logo iluminado y mesa larga" fetchpriority="high" decoding="async"></figure>
+      <figure class="hp-b"><img src="img/ig/salon-3.jpg" width="1050" height="1400" alt="Rincón del salón junto a la terraza" decoding="async"></figure>
+      <figure class="hp-c"><img src="img/ig/tomate-burrata-1.jpg" width="1218" height="1218" alt="Tomate azul con burrata y pesto" decoding="async"></figure>
     </div>
     <div class="seal rv"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="sc" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#sc" textLength="496" lengthAdjust="spacing">DESAYUNOS · TAPAS · TERRAZA · DOS HERMANAS · </textPath></text></svg><img src="img/logo.png" width="480" height="480" alt="Logo de Bulebar"></div>
   </div>
