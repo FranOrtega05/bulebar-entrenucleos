@@ -322,6 +322,8 @@ footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);
   .hp{justify-self:center;width:min(100%,420px);margin-top:1.5rem}
   .hero .seal{top:7.6rem;bottom:auto;left:auto;right:1rem;width:80px}
 }
+@media (max-width:1000px){.hero .seal{display:none}}
+@media (max-width:699px){.hero .qa .q:not(.main){display:none}.hero .qa{grid-template-columns:1fr}}
 
 /* bandas de foto */
 .band{position:relative;isolation:isolate;display:grid;align-items:end;min-height:clamp(360px,44vw,560px);padding-block:clamp(2.5rem,5vw,4.5rem);overflow:hidden}
