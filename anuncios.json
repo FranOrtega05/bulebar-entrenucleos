@@ -1,0 +1,15 @@
+{
+  "anuncios": [
+    {
+      "titulo": "Menús de Navidad",
+      "etiqueta": "Navidad",
+      "fecha": "2026-10-28",
+      "hasta": "2026-12-31",
+      "destacado": true,
+      "texto": "La Navidad se disfruta alrededor de una buena mesa. Tenemos preparados tres menús especiales de 35 €, 45 € y 60 €, y también podemos crear un menú personalizado a tu gusto. Consúltanos y reserva tu mesa para estas fiestas.",
+      "imagenes": ["img/ig/menu-navidad-1.jpg", "img/ig/menu-navidad-2.jpg"],
+      "enlace": "https://www.instagram.com/bulebar_entrenucleos/p/DfCS6zriJxG/",
+      "enlaceTexto": "Ver la publicación"
+    }
+  ]
+}

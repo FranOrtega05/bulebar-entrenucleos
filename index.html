@@ -336,6 +336,46 @@ footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);
 .price{flex:none;padding:.55rem 1.05rem;border-radius:999px;background:var(--gold);color:var(--on-gold);font:600 1.15rem/1 var(--display);font-variant-numeric:tabular-nums}
 @media (max-width:800px){.stars2{grid-template-columns:1fr}.star:not(.big) .ph{aspect-ratio:1}}
 
+/* novedades (se rellenan desde anuncios.json) */
+#novedades{padding-block:clamp(3rem,7vw,6rem)}
+.news{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(1rem,2.4vw,2rem)}
+.nw{display:grid;grid-template-columns:minmax(0,1fr);gap:1.2rem;align-content:start;padding:clamp(.9rem,2vw,1.5rem);border:1px solid var(--line);border-radius:30px;background:linear-gradient(160deg,var(--surface),var(--bg2))}
+.nw .ph{position:relative;display:block;width:100%;aspect-ratio:4/3;padding:0;cursor:zoom-in;border-radius:22px}
+.nw .more{position:absolute;right:.8rem;bottom:.8rem;padding:.45rem .8rem;border-radius:999px;background:rgba(20,16,13,.78);color:var(--ink);font:500 .78rem/1 var(--body)}
+.nw .nb{padding:.2rem .5rem .6rem}
+.nw time{display:block;margin-top:1.2rem;font:500 .78rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.nw h3{font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.12;margin-bottom:.8rem}
+.nw p{margin:0 0 1rem;max-width:56ch}
+.nw.lead{grid-column:1/-1}
+.nw.lead h3{font-size:clamp(2rem,3.6vw,3rem)}
+@media (min-width:800px){.nw.lead{grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(1.5rem,4vw,4rem);align-items:center}.nw.lead .ph{aspect-ratio:4/5}.nw.lead .nb{padding:1rem 1rem 1rem 0}}
+
+/* collage del salón */
+.collage{display:grid;grid-template-columns:1fr 1fr;gap:clamp(.6rem,1.4vw,1.1rem);align-items:start}
+.collage>div{display:grid;gap:clamp(.6rem,1.4vw,1.1rem)}
+.collage>div+div{margin-top:clamp(1.5rem,5vw,4rem)}
+.collage .ph{display:block;width:100%;padding:0;aspect-ratio:3/4;cursor:zoom-in}
+
+/* galería de platos */
+#galeria{background:var(--bg2);border-block:1px solid var(--line)}
+.ig{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:dense;gap:clamp(.5rem,1.2vw,1rem)}
+.ig .t{position:relative;display:block;width:100%;aspect-ratio:1;padding:0;overflow:hidden;cursor:zoom-in;border-radius:20px;border:1px solid var(--line);background:var(--surface)}
+.ig .t.big{grid-column:span 2;grid-row:span 2;border-radius:28px}
+.ig .t img{width:100%;height:100%;object-fit:cover;transition:transform 700ms var(--ease)}
+.ig .t span{position:absolute;inset:auto 0 0 0;padding:2.4rem .9rem .8rem;background:linear-gradient(transparent,rgba(14,10,8,.85));color:var(--ink);font:500 .95rem/1.25 var(--display);text-align:left}
+.ig .cta{display:grid;place-content:center;gap:.5rem;padding:1rem;text-align:center;cursor:pointer;background:var(--gold);border-color:var(--gold);color:var(--on-gold);transition:background-color 200ms var(--ease),transform 160ms var(--ease)}
+.ig .cta b{font:500 clamp(1.1rem,2vw,1.5rem)/1.15 var(--display)}
+.ig .cta small{font:500 .82rem/1.3 var(--body)}
+.ig .cta:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .ig .t span{opacity:0;transform:translateY(6px);transition:opacity 260ms var(--ease),transform 260ms var(--ease)}
+  .ig .t:hover span,.ig .t:focus-visible span{opacity:1;transform:none}
+  .ig .t:hover img{transform:scale(1.04)}
+  .ig .cta:hover{background:var(--gold2)}
+}
+@media (max-width:700px){.ig{grid-template-columns:repeat(2,minmax(0,1fr))}.ig .t span{font-size:.82rem;padding:1.8rem .7rem .6rem}}
+@media (prefers-reduced-motion:reduce){.ig .t img,.ig .t span{transition:none}}
+
 /* progreso de scroll */
 #prog{position:fixed;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:0 50%;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:60;pointer-events:none}
 /* buscador */
@@ -383,7 +423,7 @@ footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);
   <span class="pill status" data-status><span class="dot"></span><span class="st">Comprobando horario</span></span>
   <a class="btn pri" href="https://wa.me/34630112791?text=Hola%2C%20quer%C3%ADa%20reservar%20una%20mesa%20en%20Bulebar." target="_blank" rel="noopener">Reservar</a>
 </div>
-<div class="wrap"><nav class="secbar" aria-label="Ir a un apartado"><a href="#inicio">Inicio</a><a href="#estrellas">Estrellas</a><a href="#carta">Carta</a><a href="#casa">La casa</a><a href="#reservar">Reservar</a><a href="#opiniones">Opiniones</a><a href="#visitanos">Cómo llegar</a></nav></div></header>
+<div class="wrap"><nav class="secbar" aria-label="Ir a un apartado"><a href="#inicio">Inicio</a><a href="#novedades" hidden>Novedades</a><a href="#estrellas">Estrellas</a><a href="#carta">Carta</a><a href="#casa">La casa</a><a href="#galeria">Fotos</a><a href="#reservar">Reservar</a><a href="#opiniones">Opiniones</a><a href="#visitanos">Cómo llegar</a></nav></div></header>
 
 <main id="top">
 <section class="hero" id="inicio">
@@ -412,6 +452,11 @@ footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);
   <div class="cell rv"><small>Llámanos</small><b>630 11 27 91</b><a class="lk" href="tel:+34630112791">Llamar ahora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 </div></div>
 
+<section id="novedades" hidden><div class="wrap">
+  <div class="head"><div data-stagger><span class="eyebrow rv">Novedades</span><h2 class="rv">Lo último en Bulebar</h2></div><a class="lk rv" href="https://www.instagram.com/bulebar_entrenucleos/" target="_blank" rel="noopener">Más en Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  <div class="news" id="news"></div>
+</div></section>
+
 <section id="estrellas"><div class="wrap">
   <div class="head"><div data-stagger><span class="eyebrow rv">Imprescindibles</span><h2 class="rv">Dos platos que no te puedes perder</h2></div><a class="lk rv" href="#carta">Ver toda la carta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   <div class="stars2" data-stagger>
@@ -431,7 +476,16 @@ footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);
 </div></section>
 
 <section id="casa"><div class="wrap story">
-  <button class="ph rv" type="button" data-lb="img/salon-mesa.jpg" data-alt="Mesa larga del salón de Bulebar" data-cap="El salón ampliado" aria-label="Ampliar foto del salón"><img src="img/salon-mesa.jpg" width="1170" height="1349" alt="Mesa larga y sillas de terciopelo en el salón de Bulebar"></button>
+  <div class="collage rv">
+    <div>
+      <button class="ph" type="button" data-lb="img/ig/salon-1.jpg" data-alt="Salón de Bulebar con el logo iluminado en la pared" data-cap="El salón ampliado" aria-label="Ampliar foto del salón"><img src="img/ig/salon-1.jpg" width="1053" height="1400" alt="Salón de Bulebar con el logo iluminado en la pared" loading="lazy"></button>
+      <button class="ph" type="button" data-lb="img/ig/salon-3.jpg" data-alt="Rincón del salón junto a la cristalera, con glicinias" data-cap="Luz natural y glicinias" aria-label="Ampliar foto del rincón de la cristalera"><img src="img/ig/salon-3.jpg" width="1050" height="1400" alt="Rincón del salón junto a la cristalera, con glicinias" loading="lazy"></button>
+    </div>
+    <div>
+      <button class="ph" type="button" data-lb="img/ig/salon-2.jpg" data-alt="Mesa larga con sillas de colores en el salón de Bulebar" data-cap="La mesa larga para grupos" aria-label="Ampliar foto de la mesa larga"><img src="img/ig/salon-2.jpg" width="1053" height="1400" alt="Mesa larga con sillas de colores en el salón de Bulebar" loading="lazy"></button>
+      <button class="ph" type="button" data-lb="img/ig/salon-4.jpg" data-alt="Mesas del salón de Bulebar junto a la cristalera" data-cap="Mesas para comer sin prisas" aria-label="Ampliar foto de las mesas del salón"><img src="img/ig/salon-4.jpg" width="1050" height="1400" alt="Mesas del salón de Bulebar junto a la cristalera" loading="lazy"></button>
+    </div>
+  </div>
   <div data-stagger>
     <span class="eyebrow rv">La casa</span>
     <h2 class="rv">Un rincón de siempre en el barrio nuevo</h2>
@@ -442,6 +496,26 @@ footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);
       <div><dt>Terraza</dt><dd>Al aire libre y también cubierta en invierno. Se puede ir con perro.</dd></div>
       <div><dt>Salón ampliado</dt><dd>Más espacio para comidas y cenas, con mesa larga para grupos.</dd></div>
     </dl>
+  </div>
+</div></section>
+
+<section id="galeria"><div class="wrap">
+  <div class="head"><div data-stagger><span class="eyebrow rv">Desde la cocina</span><h2 class="rv">Platos que entran por los ojos</h2></div><a class="lk rv" href="https://www.instagram.com/bulebar_entrenucleos/" target="_blank" rel="noopener">Síguenos en Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  <div class="ig rv">
+    <button class="t big" type="button" data-lb="img/ig/tomate-burrata-1.jpg" data-alt="Tomate azul aliñado con burrata y pesto de albahaca" data-cap="Tomate azul con burrata y pesto" aria-label="Ampliar foto del tomate con burrata"><img src="img/ig/tomate-burrata-1.jpg" width="1218" height="1218" alt="Tomate azul aliñado con burrata y pesto de albahaca" loading="lazy"><span>Tomate azul con burrata y pesto</span></button>
+    <button class="t" type="button" data-lb="img/ig/tacos-camaron-1.jpg" data-alt="Tacos de tortilla de camarones con ceviche de gambas" data-cap="Taco de tortilla de camarones con ceviche de gambas" aria-label="Ampliar foto de los tacos de camarones"><img src="img/ig/tacos-camaron-1.jpg" width="1165" height="1165" alt="Tacos de tortilla de camarones con ceviche de gambas" loading="lazy"><span>Tacos de camarones</span></button>
+    <button class="t" type="button" data-lb="img/ig/solomillo-whisky-1.jpg" data-alt="Solomillo al whisky con patatas" data-cap="Solomillo al whisky" aria-label="Ampliar foto del solomillo al whisky"><img src="img/ig/solomillo-whisky-1.jpg" width="1354" height="1086" alt="Solomillo al whisky con patatas" loading="lazy"><span>Solomillo al whisky</span></button>
+    <button class="t" type="button" data-lb="img/ig/bacalao.jpg" data-alt="Bacalao confitado con verduras pochadas" data-cap="Bacalao confitado con verduras pochadas" aria-label="Ampliar foto del bacalao confitado"><img src="img/ig/bacalao.jpg" width="1254" height="1254" alt="Bacalao confitado con verduras pochadas" loading="lazy"><span>Bacalao confitado</span></button>
+    <button class="t" type="button" data-lb="img/ig/croquetas-morcon.jpg" data-alt="Croquetas de morcón ibérico" data-cap="Croquetas de morcón ibérico" aria-label="Ampliar foto de las croquetas de morcón"><img src="img/ig/croquetas-morcon.jpg" width="1254" height="1254" alt="Croquetas de morcón ibérico" loading="lazy"><span>Croquetas de morcón ibérico</span></button>
+    <button class="t" type="button" data-lb="img/ig/brioche-huevo-1.jpg" data-alt="Pan brioche con carne deshilachada, verduras y huevo" data-cap="Brioche con carne deshilachada y huevo" aria-label="Ampliar foto del brioche con huevo"><img src="img/ig/brioche-huevo-1.jpg" width="1254" height="1254" alt="Pan brioche con carne deshilachada, verduras y huevo" loading="lazy"><span>Brioche con carne y huevo</span></button>
+    <button class="t" type="button" data-lb="img/ig/solomillo-carbonara.jpg" data-alt="Solomillo con salsa carbonara y patatas" data-cap="Solomillo con salsa carbonara" aria-label="Ampliar foto del solomillo carbonara"><img src="img/ig/solomillo-carbonara.jpg" width="1248" height="1248" alt="Solomillo con salsa carbonara y patatas" loading="lazy"><span>Solomillo carbonara</span></button>
+    <button class="t" type="button" data-lb="img/ig/arroz-pollo.jpg" data-alt="Arroz con pollo y verduras en plato azul" data-cap="Arroz con pollo y verduras" aria-label="Ampliar foto del arroz"><img src="img/ig/arroz-pollo.jpg" width="1248" height="1248" alt="Arroz con pollo y verduras en plato azul" loading="lazy"><span>Arroz con pollo y verduras</span></button>
+    <button class="t big" type="button" data-lb="img/ig/tacos-camaron-2.jpg" data-alt="Primer plano de los tacos de camarones con cebolla encurtida" data-cap="Tradición y frescura en un solo bocado" aria-label="Ampliar foto de los tacos de camarones"><img src="img/ig/tacos-camaron-2.jpg" width="1254" height="1254" alt="Primer plano de los tacos de camarones con cebolla encurtida" loading="lazy"><span>Tradición y frescura en un solo bocado</span></button>
+    <button class="t" type="button" data-lb="img/ig/tomate-burrata-2.jpg" data-alt="Tomate con burrata visto desde arriba" data-cap="Frescura y sabor en cada bocado" aria-label="Ampliar foto del tomate con burrata"><img src="img/ig/tomate-burrata-2.jpg" width="1198" height="1198" alt="Tomate con burrata visto desde arriba" loading="lazy"><span>Frescura en cada bocado</span></button>
+    <button class="t" type="button" data-lb="img/ig/brioche-huevo-2.jpg" data-alt="Primer plano del brioche con huevo frito" data-cap="Brioche relleno con huevo" aria-label="Ampliar foto del brioche"><img src="img/ig/brioche-huevo-2.jpg" width="1144" height="1144" alt="Primer plano del brioche con huevo frito" loading="lazy"><span>Brioche con huevo</span></button>
+    <button class="t" type="button" data-lb="img/ig/solomillo-whisky-2.jpg" data-alt="Solomillo al whisky, tierno y jugoso" data-cap="Tierno, jugoso y con una salsa irresistible" aria-label="Ampliar foto del solomillo"><img src="img/ig/solomillo-whisky-2.jpg" width="1118" height="896" alt="Solomillo al whisky, tierno y jugoso" loading="lazy"><span>Tierno y jugoso</span></button>
+    <button class="t" type="button" data-lb="img/ig/detalle-mesa.jpg" data-alt="Mesa puesta con cestita de pan y carta en Bulebar" data-cap="Cuidamos cada detalle" aria-label="Ampliar foto de la mesa puesta"><img src="img/ig/detalle-mesa.jpg" width="1168" height="1168" alt="Mesa puesta con cestita de pan y carta en Bulebar" loading="lazy"><span>Cuidamos cada detalle</span></button>
+    <a class="t cta" href="https://www.instagram.com/bulebar_entrenucleos/" target="_blank" rel="noopener"><b>Más en Instagram</b><small>@bulebar_entrenucleos</small></a>
   </div>
 </div></section>
 
@@ -592,11 +666,11 @@ footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);
   });
 
   /* visor de fotos */
-  var items=$$('[data-lb]'),lb=$('#lb'),lbi=$('#lb-img'),lbc=$('#lb-cap'),cur=0,last=null;
+  var items=[],lb=$('#lb'),lbi=$('#lb-img'),lbc=$('#lb-cap'),cur=0,last=null;
   function show(i){cur=(i+items.length)%items.length;var it=items[cur];lbi.src=it.getAttribute('data-lb');lbi.alt=it.getAttribute('data-alt')||'';lbc.textContent=it.getAttribute('data-cap')||''}
   function openLb(i){last=document.activeElement;show(i);lb.hidden=false;void lb.offsetWidth;lb.classList.add('open');$('.x',lb).focus();document.body.style.overflow='hidden'}
   function closeLb(){lb.classList.remove('open');document.body.style.overflow='';setTimeout(function(){lb.hidden=true},reduce?0:240);if(last)last.focus()}
-  items.forEach(function(g,i){g.addEventListener('click',function(){openLb(i)})});
+  document.addEventListener('click',function(e){var g=e.target.closest&&e.target.closest('[data-lb]');if(!g)return;items=$$('[data-lb]');openLb(items.indexOf(g))});
   $('.x',lb).addEventListener('click',closeLb);
   $('.pv',lb).addEventListener('click',function(){show(cur-1)});
   $('.nx',lb).addEventListener('click',function(){show(cur+1)});
@@ -607,6 +681,31 @@ footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);
     if(e.key==='ArrowRight')show(cur+1);
     if(e.key==='ArrowLeft')show(cur-1);
   });
+})();
+
+/* novedades: se leen de anuncios.json */
+(function(){
+  var sec=document.getElementById('novedades'),box=document.getElementById('news'),lnk=document.querySelector('.secbar a[href="#novedades"]');
+  if(!sec||!box||!window.fetch)return;
+  var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+  var safe=function(u){return /^(https?:\/\/|img\/)/.test(u||'')?u:''};
+  var today=new Date().toLocaleDateString('sv-SE',{timeZone:'Europe/Madrid'});
+  var fmt=function(d){var t=new Date(d+'T12:00:00');return isNaN(t)?'':t.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'})};
+  var arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  function card(a,i){
+    var imgs=(a.imagenes||(a.imagen?[a.imagen]:[])).map(safe).filter(Boolean),href=safe(a.enlace),cap=esc(a.titulo),ph='';
+    if(imgs.length){
+      ph='<button class="ph" type="button" data-lb="'+esc(imgs[0])+'" data-alt="'+esc(a.alt||a.titulo)+'" data-cap="'+cap+'" aria-label="Ampliar foto: '+cap+'"><img src="'+esc(imgs[0])+'" alt="'+esc(a.alt||a.titulo)+'" loading="lazy">'+(imgs.length>1?'<span class="more">'+imgs.length+' fotos</span>':'')+'</button>'+
+        imgs.slice(1).map(function(u){return '<button hidden type="button" data-lb="'+esc(u)+'" data-alt="'+esc(a.alt||a.titulo)+'" data-cap="'+cap+'"></button>'}).join('');
+    }
+    return '<article class="nw'+(i===0?' lead':'')+'">'+ph+'<div class="nb">'+(a.etiqueta?'<span class="tag">'+esc(a.etiqueta)+'</span>':'')+'<h3>'+cap+'</h3>'+(a.texto?'<p>'+esc(a.texto)+'</p>':'')+(href?'<a class="lk" href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(a.enlaceTexto||'Ver más')+' '+arrow+'</a>':'')+(a.fecha&&fmt(a.fecha)?'<time datetime="'+esc(a.fecha)+'">'+fmt(a.fecha)+'</time>':'')+'</div></article>';
+  }
+  fetch('anuncios.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
+    var list=(j.anuncios||[]).filter(function(a){return a&&a.titulo&&(!a.hasta||a.hasta>=today)}).sort(function(a,b){return (b.destacado?1:0)-(a.destacado?1:0)||String(b.fecha||'').localeCompare(String(a.fecha||''))});
+    if(!list.length)return;
+    box.innerHTML=list.map(card).join('');
+    sec.hidden=false;if(lnk)lnk.hidden=false;
+  }).catch(function(){});
 })();
 
 /* progreso, buscador y selector de reserva */
