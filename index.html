@@ -334,7 +334,16 @@ footer{border-top:1px solid var(--line);padding-block:2.2rem calc(2.2rem + 0px);
   .hero .seal{top:7.6rem;bottom:auto;left:auto;right:1rem;width:80px}
 }
 @media (max-width:1000px){.hero .seal{display:none}}
-@media (max-width:699px){.hero .qa .q:not(.main){display:none}.hero .qa{grid-template-columns:1fr}}
+@media (max-width:699px){.hero .qa .q:not(.main){display:none}.hero .qa{grid-template-columns:1fr}
+  .hero{padding-top:150px;min-height:0}
+  .hero-warm{background:linear-gradient(180deg,rgba(20,16,13,.55) 0,rgba(20,16,13,.42) 150px,rgba(20,16,13,.8) 400px,var(--bg) 560px),url(img/ig/salon-3-hero.webp) center top/100% auto no-repeat,var(--bg)}
+  .hero h1{text-shadow:0 2px 24px rgba(0,0,0,.55)}
+  .hero .lede{color:#f1e8da}
+  .hp{width:min(100%,360px);aspect-ratio:1/.95;margin-top:2rem}
+  .hp-b{display:none}
+  .hp-a{inset:0 18% 6% 0}
+  .hp-c{right:0;bottom:0;width:50%}
+}
 
 /* bandas de foto */
 .band{position:relative;isolation:isolate;display:grid;align-items:end;min-height:clamp(360px,44vw,560px);padding-block:clamp(2.5rem,5vw,4.5rem);overflow:hidden}
